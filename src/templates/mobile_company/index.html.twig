@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MobileCompany index{% endblock %}
+
+{% block body %}
+    <h1>MobileCompany index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mobile_company in mobile_companies %}
+            <tr>
+                <td>{{ mobile_company.id }}</td>
+                <td>{{ mobile_company.name }}</td>
+                <td>{{ mobile_company.phone }}</td>
+                <td>{{ mobile_company.address }}</td>
+                <td>
+                    <a href="{{ path('app_mobile_company_show', {'id': mobile_company.id}) }}">show</a>
+                    <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mobile_company_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MobileCompany{% endblock %}
+
+{% block body %}
+    <h1>Edit MobileCompany</h1>
+
+    {{ include('mobile_company/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_mobile_company_index') }}">back to list</a>
+
+    {{ include('mobile_company/_delete_form.html.twig') }}
+{% endblock %}
