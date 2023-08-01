@@ -15,18 +15,8 @@
     {% endblock %}
 </head>
 <body>
-<header>
-    <div class="container-fluid">
-        <div class="col-4">
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a href="{{ path('app_logout') }}">Log out</a>
-            {% else %}
-                <a href="{{ path('app_login') }}">Login</a> |
-                <a href="{{ path('app_register') }}">Register</a>
-            {% endif %}
-        </div>
-    </div>
-</header>
+
+{{ knp_menu_render('main') }}
 
 <div class="container">
     <div class="row">
