@@ -21,6 +21,28 @@ class MobilePhoneRepository extends ServiceEntityRepository
         parent::__construct($registry, MobilePhone::class);
     }
 
+    public function searchByBrand($mobilePhoneBrandQuery)
+    {
+        $qb = $this->createQueryBuilder('mp');
+
+        return $qb->andWhere($qb->expr()->like('mp.brand', ':brand'))
+            ->setParameter('brand', "%$mobilePhoneBrandQuery%")
+            ->orderBy('mp.brand', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchByModel($mobilePhoneModelQuery)
+    {
+        $qb = $this->createQueryBuilder('mp');
+
+        return $qb->andWhere($qb->expr()->like('mp.model', ':model'))
+            ->setParameter('model', "%$mobilePhoneModelQuery%")
+            ->orderBy('mp.model', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return MobilePhone[] Returns an array of MobilePhone objects
 //     */

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MobilePhone;
 use App\Form\MobilePhoneType;
+use App\MobilePhone\SearchService;
 use App\Repository\MobilePhoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,17 @@ class MobilePhoneController extends AbstractController
         return $this->render('mobile_phone/new.html.twig', [
             'mobile_phone' => $mobilePhone,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/search', name: 'app_mobile_phone_search', methods: ['GET'])]
+    public function search(Request $request, SearchService $mobilePhoneSearchService): Response
+    {
+        $query = $request->query->get('q');
+        return $this->render('mobile_phone/index.html.twig', [
+            'q' => $query,
+            'mobile_phones' => array_merge($mobilePhoneSearchService->searchBrand($query),
+                $mobilePhoneSearchService->searchModel($query)),
         ]);
     }
 
