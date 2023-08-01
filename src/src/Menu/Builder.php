@@ -26,6 +26,10 @@ class Builder
     {
         $menu = $this->factory->createItem('root');
 
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Admin', ['route' => 'admin']);
+        }
+
         if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild('Log out', ['route' => 'app_logout']);
         } else {
