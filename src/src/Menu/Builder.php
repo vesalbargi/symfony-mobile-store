@@ -6,27 +6,27 @@ use App\Entity\MobileCompany;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class Builder
 {
-    private $factory;
+    private FactoryInterface $factory;
     private EntityManagerInterface $entityManager;
-    private $access;
+    private Security $security;
 
-    public function __construct(FactoryInterface $factory, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(FactoryInterface $factory, EntityManagerInterface $entityManager, Security $security)
     {
         $this->factory = $factory;
         $this->entityManager = $entityManager;
-        $this->access = $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED');
+        $this->security = $security;
     }
 
     public function mainMenu(RequestStack $requestStack): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
-        if ($this->access) {
+        if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild('Log out', ['route' => 'app_logout']);
         } else {
             $menu->addChild('Login', ['route' => 'app_login']);
