@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/mobile-phone')]
 class MobilePhoneController extends AbstractController
@@ -63,6 +64,7 @@ class MobilePhoneController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_mobile_phone_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('EDIT', 'mobilePhone')]
     public function edit(Request $request, MobilePhone $mobilePhone, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MobilePhoneType::class, $mobilePhone);
@@ -80,6 +82,7 @@ class MobilePhoneController extends AbstractController
         ]);
     }
 
+    #[IsGranted('DELETE', 'mobilePhone')]
     #[Route('/{id}', name: 'app_mobile_phone_delete', methods: ['POST'])]
     public function delete(Request $request, MobilePhone $mobilePhone, EntityManagerInterface $entityManager): Response
     {
