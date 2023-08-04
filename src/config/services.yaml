@@ -25,12 +25,10 @@ services:
 
     app.menu_builder:
         class: App\Menu\Builder
-
-    app.main_menu:
-        class: Knp\Menu\MenuItem # the service definition requires setting the class
-        factory: [ "@app.menu_builder", mainMenu ]
+        arguments: ["@knp_menu.factory"]
         tags:
-            - { name: knp_menu.menu, alias: main }
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: navbarMenu, alias: navbar }
 
     App\Listeners\TimeLoggerListener:
         tags:
