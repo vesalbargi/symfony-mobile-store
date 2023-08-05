@@ -7,6 +7,8 @@ use App\Model\TimeLoggerTrait;
 use App\Model\UserLoggerInterface;
 use App\Model\UserLoggerTrait;
 use App\Repository\MobilePhoneRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -64,6 +66,20 @@ class MobilePhone implements TimeLoggerInterface, UserLoggerInterface
     #[ORM\ManyToOne(inversedBy: 'MobilePhones')]
     #[ORM\JoinColumn(nullable: false)]
     private ?MobileCompany $mobileCompany = null;
+
+    #[ORM\OneToMany(mappedBy: 'mobilePhone', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return "[{$this->getId()}]  {$this->getBrand()} {$this->getModel()}";
+    }
+
 
     public function getId(): ?int
     {
@@ -186,6 +202,36 @@ class MobilePhone implements TimeLoggerInterface, UserLoggerInterface
     public function setMobileCompany(?MobileCompany $mobileCompany): static
     {
         $this->mobileCompany = $mobileCompany;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setMobilePhone($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getMobilePhone() === $this) {
+                $comment->setMobilePhone(null);
+            }
+        }
 
         return $this;
     }
