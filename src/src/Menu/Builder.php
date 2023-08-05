@@ -30,7 +30,7 @@ class Builder implements ContainerAwareInterface
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->addChild('About Us', ['route' => 'app_home'])
+        $menu->addChild('About Us', ['route' => 'app_about'])
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
 
@@ -76,7 +76,7 @@ class Builder implements ContainerAwareInterface
         $menu = $this->factory->createItem('root');
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            $menu->addChild('Admin', ['route' => 'admin'])
+            $menu->addChild('Admin Dashboard', ['route' => 'admin'])
                 ->setAttribute('class', 'nav-item')
                 ->setLinkAttribute('class', 'nav-link');
         }

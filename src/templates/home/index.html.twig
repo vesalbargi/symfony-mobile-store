@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container text-start">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <h2 class="mb-5">Discover the latest innovations and trends in the world of mobile phones, right at
+                your
+                click!</h2>
+            <a href="{{ path('app_mobile_company_index') }}" class="btn btn-outline-light btn-lg me-2"
+               role="button">Mobile
+                Companies</a>
+            <a href="{{ path('app_mobile_phone_index') }}" class="btn btn-outline-light btn-lg ms-2"
+               role="button">Mobile
+                Phones</a>
+        {% else %}
+            <h1 class="mb-5">Welcome to TechTalks</h1>
+            <h2 class="mb-4">Let's get started :)</h2>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-light btn-lg me-2" role="button">Login
+                Now</a>
+            <a href="{{ path('app_register') }}" class="btn btn-outline-light btn-lg ms-2" role="button">Register
+                Now</a>
+        {% endif %}
+        <img src="{{ asset('build/images/background.jpg') }}" alt="background" class="img-fluid rounded mt-5"
+             width="650">
+    </div>
 {% endblock %}
