@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\MobilePhone;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\MobilePhoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/comment')]
 class CommentController extends AbstractController
@@ -30,6 +33,9 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $id = $request->get('id');
+            $mobilePhone = $entityManager->getRepository(MobilePhone::class)->find($id);
+            $comment->setMobilePhone($mobilePhone);
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -51,6 +57,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('EDIT', 'comment')]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CommentType::class, $comment);
@@ -69,6 +76,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[IsGranted('DELETE', 'comment')]
     public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {

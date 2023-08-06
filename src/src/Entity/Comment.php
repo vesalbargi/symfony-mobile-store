@@ -2,20 +2,20 @@
 
 namespace App\Entity;
 
+use App\Model\OwnerInterface;
+use App\Model\OwnerTrait;
 use App\Model\TimeLoggerInterface;
 use App\Model\TimeLoggerTrait;
-use App\Model\UserLoggerInterface;
-use App\Model\UserLoggerTrait;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
-class Comment implements TimeLoggerInterface, UserLoggerInterface
+class Comment implements TimeLoggerInterface, OwnerInterface
 {
     use TimeLoggerTrait;
-    use UserLoggerTrait;
+    use OwnerTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

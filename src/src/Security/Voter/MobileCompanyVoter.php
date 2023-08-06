@@ -3,7 +3,6 @@
 namespace App\Security\Voter;
 
 use App\Entity\MobileCompany;
-use App\Entity\MobilePhone;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,9 +40,13 @@ class MobileCompanyVoter extends Voter
             return false;
         }
 
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return true;
+        }
+
         // ... (check conditions and return true to grant permission) ...
         return match ($attribute) {
-            self::EDIT, self::DELETE => $subject->getCreatedUser() == $user,
+            self::EDIT, self::DELETE => $subject->getOwner() === $user,
             default => false,
         };
 

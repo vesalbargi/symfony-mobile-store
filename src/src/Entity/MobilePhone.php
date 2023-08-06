@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
+use App\Model\OwnerInterface;
+use App\Model\OwnerTrait;
 use App\Model\TimeLoggerInterface;
 use App\Model\TimeLoggerTrait;
-use App\Model\UserLoggerInterface;
-use App\Model\UserLoggerTrait;
 use App\Repository\MobilePhoneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MobilePhoneRepository::class)]
-class MobilePhone implements TimeLoggerInterface, UserLoggerInterface
+class MobilePhone implements TimeLoggerInterface, OwnerInterface
 {
     use TimeLoggerTrait;
-    use UserLoggerTrait;
+    use OwnerTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

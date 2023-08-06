@@ -2,12 +2,12 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\MobilePhone;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class MobilePhoneVoter extends Voter
+class CommentVoter extends Voter
 {
     public const EDIT = 'EDIT';
     public const VIEW = 'VIEW';
@@ -18,12 +18,12 @@ class MobilePhoneVoter extends Voter
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE])
-            && $subject instanceof \App\Entity\MobilePhone;
+            && $subject instanceof \App\Entity\Comment;
     }
 
     /**
      * @param string $attribute
-     * @param mixed|MobilePhone $subject
+     * @param mixed|Comment $subject
      * @param TokenInterface $token
      * @return bool
      */

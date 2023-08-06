@@ -14,7 +14,6 @@ class CommentType extends AbstractType
         $builder
             ->add('subject')
             ->add('body')
-            ->add('mobilePhone')
         ;
     }
 
