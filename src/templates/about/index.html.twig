@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block body %}
+    <div class="container text-start">
+        <h1>{{ 'about.about_us'|trans }}</h1>
+        <p>{{ 'about.about_us_text'|trans }}</p>
+        <h2 class="mt-4">{{ 'about.contact'|trans }}</h2>
+        <p>{{ 'about.address'|trans }}</p>
+        <p>{{ 'about.email'|trans }}</p>
+        <p>{{ 'about.phone'|trans }}</p>
+    </div>
+{% endblock %}

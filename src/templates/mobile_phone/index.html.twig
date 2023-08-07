@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MobilePhone index{% endblock %}
+
+{% block body %}
+    <h1>MobilePhone index</h1>
+
+    <form class="input-group my-lg-4" method="get" action="{{ path('app_mobile_phone_search') }}">
+        <div class="col-4">
+            <input type="search" placeholder="Search" class="form-control" name="q" value="{{ q|default('') }}">
+        </div>
+        <button type="submit" class="btn btn-primary">{{ 'actions.search'|trans }}</button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>OperatingSystem</th>
+            <th>ScreenSize</th>
+            <th>Memory</th>
+            <th>Storage</th>
+            <th>Camera</th>
+            <th>BatteryCapacity</th>
+            <th>Price</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mobile_phone in mobile_phones %}
+            <tr>
+                <td>{{ mobile_phone.id }}</td>
+                <td>{{ mobile_phone.brand }}</td>
+                <td>{{ mobile_phone.model }}</td>
+                <td>{{ mobile_phone.operatingSystem }}</td>
+                <td>{{ mobile_phone.screenSize }}</td>
+                <td>{{ mobile_phone.memory }}</td>
+                <td>{{ mobile_phone.storage }}</td>
+                <td>{{ mobile_phone.camera }}</td>
+                <td>{{ mobile_phone.batteryCapacity }}</td>
+                <td>{{ mobile_phone.price }}</td>
+                <td>
+                    <a href="{{ path('app_mobile_phone_show', {'id': mobile_phone.id}) }}">{{ 'actions.show'|trans }}</a>
+                    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">{{ 'actions.edit'|trans }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mobile_phone_new') }}">{{ 'actions.create'|trans }}</a>
+{% endblock %}

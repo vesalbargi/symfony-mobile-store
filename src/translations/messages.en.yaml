@@ -1,0 +1,29 @@
+actions:
+  create: Create new
+  show: Show
+  edit: Edit
+  delete: Delete
+  back: back to list
+  search: Search
+  comments: Comments
+  add_comment: Add Comment
+
+home:
+  registered_text: Discover the latest innovations and trends in the world of mobile phones, right at your click!
+  company_button: Mobile Companies
+  phone_button: Mobile Phones
+  not_registered_text_1: Welcome to TechTalks
+  not_registered_text_2: Let's get started :)
+  login_button: Login Now
+  register_button: Register Now
+
+about:
+  about_us: About Us
+  contact: Contact Information
+  about_us_text: Welcome to TechTalks, a platform designed for both companies and users. We provide an
+    avenue for companies to list their mobile phones, showcasing their features and prices. Users can register
+    to access detailed technical information about these phones and read reviews from other users. Join us today
+    and experience the future of mobile phone information sharing.
+  address: 11 Kaj St, Tehran, Iran
+  email: 'Email: vesal.bargi.work@gmail.com'
+  phone: 'Phone: (901) 682-3144'

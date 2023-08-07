@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MobileCompany{% endblock %}
+
+{% block body %}
+    <h1>MobileCompany</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ mobile_company.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ mobile_company.name }}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{ mobile_company.phone }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ mobile_company.address }}</td>
+        </tr>
+        <tr>
+            <th>Mobile Phones</th>
+            <td>
+                <ul>
+                    {% for mobile_phone in mobile_company.mobilePhones %}
+                        <li>
+                            <a href="{{ path('app_mobile_phone_show', {'id': mobile_company.id}) }}">
+                                {{ mobile_phone.model }} - {{ mobile_phone.memory }} / {{ mobile_phone.storage }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mobile_company_index') }}">{{ 'actions.back'|trans }}</a>
+
+    <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}">{{ 'actions.edit'|trans }}</a>
+
+    {{ include('mobile_company/_delete_form.html.twig') }}
+{% endblock %}
