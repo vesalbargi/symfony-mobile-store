@@ -9,7 +9,7 @@
         <div class="col-4">
             <input type="search" placeholder="Search" class="form-control" name="q" value="{{ q|default('') }}">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">{{ 'actions.search'|trans }}</button>
     </form>
 
     <table class="table">
@@ -42,8 +42,8 @@
                 <td>{{ mobile_phone.batteryCapacity }}</td>
                 <td>{{ mobile_phone.price }}</td>
                 <td>
-                    <a href="{{ path('app_mobile_phone_show', {'id': mobile_phone.id}) }}">show</a>
-                    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">edit</a>
+                    <a href="{{ path('app_mobile_phone_show', {'id': mobile_phone.id}) }}">{{ 'actions.show'|trans }}</a>
+                    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">{{ 'actions.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
@@ -54,5 +54,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_mobile_phone_new') }}">Create new</a>
+    <a href="{{ path('app_mobile_phone_new') }}">{{ 'actions.create'|trans }}</a>
 {% endblock %}

@@ -4,14 +4,11 @@
 
 {% block body %}
     <div class="container text-start">
-        <h1>About Us</h1>
-        <p>Welcome to TechTalks, a platform designed for both companies and users. We provide an
-            avenue for companies to list their mobile phones, showcasing their features and prices. Users can register
-            to access detailed technical information about these phones and read reviews from other users. Join us today
-            and experience the future of mobile phone information sharing.</p>
-        <h2 class="mt-4">Contact Information</h2>
-        <p>11 Kaj St, Tehran, Iran</p>
-        <p>Email: vesal.bargi.work@gmail.com</p>
-        <p>Phone: (901) 682-3144</p>
+        <h1>{{ 'about.about_us'|trans }}</h1>
+        <p>{{ 'about.about_us_text'|trans }}</p>
+        <h2 class="mt-4">{{ 'about.contact'|trans }}</h2>
+        <p>{{ 'about.address'|trans }}</p>
+        <p>{{ 'about.email'|trans }}</p>
+        <p>{{ 'about.phone'|trans }}</p>
     </div>
 {% endblock %}

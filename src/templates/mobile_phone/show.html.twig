@@ -50,26 +50,26 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_mobile_phone_index') }}">back to list</a>
+    <a href="{{ path('app_mobile_phone_index') }}">{{ 'actions.back'|trans }}</a>
 
-    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">edit</a>
+    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">{{ 'actions.edit'|trans }}</a>
 
     {{ include('mobile_phone/_delete_form.html.twig') }}
 
     <button class="btn btn-outline-light mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#reviewForm">
-        Comments
+        {{ 'actions.comments'|trans }}
     </button>
 
     <div class="collapse mt-4" id="reviewForm">
         <a href="{{ path('app_comment_new', {'id': mobile_phone.id}) }}" class="btn btn-outline-light mb-4" role="button">
-            Add Comment
+            {{ 'actions.add_comment'|trans }}
         </a>
         {% for comment in mobile_phone.comments %}
             <div class="card card-body mb-4">
                 <div class="mb-2">
                     <div class="text-end">
                         <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
-                           class="btn btn-primary" role="button">Edit</a>
+                           class="btn btn-primary" role="button">{{ 'actions.edit'|trans }}</a>
                     </div>
                     <label class="form-label">Email:</label>
                     <input type="text" class="form-control mb-2" value="{{ comment.owner.email }}" readonly>

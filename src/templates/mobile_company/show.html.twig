@@ -40,9 +40,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_mobile_company_index') }}">back to list</a>
+    <a href="{{ path('app_mobile_company_index') }}">{{ 'actions.back'|trans }}</a>
 
-    <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}">edit</a>
+    <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}">{{ 'actions.edit'|trans }}</a>
 
     {{ include('mobile_company/_delete_form.html.twig') }}
 {% endblock %}

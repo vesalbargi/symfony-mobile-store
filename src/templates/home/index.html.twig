@@ -5,22 +5,18 @@
 {% block body %}
     <div class="container text-start">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <h2 class="mb-5">Discover the latest innovations and trends in the world of mobile phones, right at
-                your
-                click!</h2>
+            <h2 class="mb-5">{{ 'home.registered_text'|trans }}</h2>
             <a href="{{ path('app_mobile_company_index') }}" class="btn btn-outline-light btn-lg me-2"
-               role="button">Mobile
-                Companies</a>
+               role="button">{{ 'home.company_button'|trans }}</a>
             <a href="{{ path('app_mobile_phone_index') }}" class="btn btn-outline-light btn-lg ms-2"
-               role="button">Mobile
-                Phones</a>
+               role="button">{{ 'home.phone_button'|trans }}</a>
         {% else %}
-            <h1 class="mb-5">Welcome to TechTalks</h1>
-            <h2 class="mb-4">Let's get started :)</h2>
-            <a href="{{ path('app_login') }}" class="btn btn-outline-light btn-lg me-2" role="button">Login
-                Now</a>
-            <a href="{{ path('app_register') }}" class="btn btn-outline-light btn-lg ms-2" role="button">Register
-                Now</a>
+            <h1 class="mb-5">{{ 'home.not_registered_text_1'|trans }}</h1>
+            <h2 class="mb-4">{{ 'home.not_registered_text_2'|trans }}</h2>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-light btn-lg me-2"
+               role="button">{{ 'home.login_button'|trans }}</a>
+            <a href="{{ path('app_register') }}" class="btn btn-outline-light btn-lg ms-2"
+               role="button">{{ 'home.register_button'|trans }}</a>
         {% endif %}
         <img src="{{ asset('build/images/background.jpg') }}" alt="background" class="img-fluid rounded mt-5"
              width="650">
