@@ -50,8 +50,7 @@ class MobilePhoneController extends AbstractController
         $query = $request->query->get('q');
         return $this->render('mobile_phone/index.html.twig', [
             'q' => $query,
-            'mobile_phones' => array_merge($mobilePhoneSearchService->searchBrand($query),
-                $mobilePhoneSearchService->searchModel($query)),
+            'mobile_phones' => $mobilePhoneSearchService->searchBrandAndModel($query),
         ]);
     }
 

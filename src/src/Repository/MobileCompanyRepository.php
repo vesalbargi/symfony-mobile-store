@@ -21,6 +21,17 @@ class MobileCompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, MobileCompany::class);
     }
 
+    public function searchByName($mobileCompanyNameQuery)
+    {
+        $qb = $this->createQueryBuilder('mc');
+
+        return $qb->andWhere($qb->expr()->like('mc.name', ':name'))
+            ->setParameter('name', "%$mobileCompanyNameQuery%")
+            ->orderBy('mc.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return MobileCompany[] Returns an array of MobileCompany objects
 //     */

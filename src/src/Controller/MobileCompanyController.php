@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MobileCompany;
 use App\Form\MobileCompanyType;
+use App\MobileCompany\SearchService;
 use App\Repository\MobileCompanyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,6 +41,16 @@ class MobileCompanyController extends AbstractController
         return $this->render('mobile_company/new.html.twig', [
             'mobile_company' => $mobileCompany,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/search', name: 'app_mobile_company_search', methods: ['GET'])]
+    public function search(Request $request, SearchService $mobileCompanySearchService ): Response
+    {
+        $query = $request->query->get('q');
+        return $this->render('mobile_company/index.html.twig', [
+            'q' => $query,
+            'mobile_companies' => $mobileCompanySearchService->searchName($query),
         ]);
     }
 

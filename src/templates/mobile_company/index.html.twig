@@ -5,6 +5,13 @@
 {% block body %}
     <h1>MobileCompany index</h1>
 
+    <form class="input-group my-lg-4" method="get" action="{{ path('app_mobile_company_search') }}">
+        <div class="col-4">
+            <input type="search" placeholder="Search" class="form-control" name="q" value="{{ q|default('') }}">
+        </div>
+        <button type="submit" class="btn btn-primary">{{ 'actions.search'|trans }}</button>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
