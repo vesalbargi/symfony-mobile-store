@@ -4,6 +4,8 @@ actions:
   edit: Edit
   delete: Delete
   back: back to list
+  login: Login
+  register: Register
   search: Search
   comments: Comments
   add_comment: Add Comment
@@ -27,3 +29,13 @@ about:
   address: 11 Kaj St, Tehran, Iran
   email: 'Email: vesal.bargi.work@gmail.com'
   phone: 'Phone: (901) 682-3144'
+
+nav:
+  brand: TechTalks
+  about_us: About Us
+  mobile_companies: Mobile Companies
+  mobile_phones: Mobile Phones
+  admin: Admin Dashboard
+  register: Register
+  login: Login
+  logout: Log out

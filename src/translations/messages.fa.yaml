@@ -4,9 +4,11 @@ actions:
   edit: ویرایش
   delete: حذف
   back: برگشت به لیست
+  login: ورود
+  register: ثبت نام
   search: جستجو
   comments: نظرات
-  add_comment: اصافه کردن نظر
+  add_comment: اضافه کردن نظر
 
 home:
   registered_text: کشف آخرین نوآوری ها و روند در دنیای تلفن های همراه، با کلیک شما!
@@ -24,3 +26,13 @@ about:
   address: ایران، تهران، خیابان کاج 11
   email: 'ایمیل: vesal.bargi.work@gmail.com'
   phone: 'تلفن: (901) 682-3144'
+
+nav:
+  brand: تک تاکس
+  about_us: درباره ما
+  mobile_companies: شرکت های موبایل
+  mobile_phones: موبایل ها
+  admin: داشبورد ادمین
+  register: ثبت نام
+  login: ورود
+  logout: خروج
