@@ -7,6 +7,7 @@ use App\Form\MobilePhoneType;
 use App\MobilePhone\SearchService;
 use App\Repository\MobilePhoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,7 @@ class MobilePhoneController extends AbstractController
     }
 
     #[Route('/new', name: 'app_mobile_phone_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_COMPANY_OWNER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $mobilePhone = new MobilePhone();
@@ -63,7 +65,7 @@ class MobilePhoneController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_mobile_phone_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('EDIT', 'mobilePhone')]
+    #[Security("is_granted('ROLE_EDITOR') or is_granted('EDIT', mobilePhone)")]
     public function edit(Request $request, MobilePhone $mobilePhone, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MobilePhoneType::class, $mobilePhone);
@@ -81,11 +83,11 @@ class MobilePhoneController extends AbstractController
         ]);
     }
 
-    #[IsGranted('DELETE', 'mobilePhone')]
     #[Route('/{id}', name: 'app_mobile_phone_delete', methods: ['POST'])]
+    #[Security("is_granted('ROLE_EDITOR') or is_granted('DELETE', mobilePhone)")]
     public function delete(Request $request, MobilePhone $mobilePhone, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$mobilePhone->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $mobilePhone->getId(), $request->request->get('_token'))) {
             $entityManager->remove($mobilePhone);
             $entityManager->flush();
         }

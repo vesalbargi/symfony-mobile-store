@@ -61,7 +61,7 @@
     </button>
 
     <div class="collapse mt-4" id="reviewForm">
-        <a href="{{ path('app_comment_new', {'id': mobile_phone.id}) }}" class="btn btn-outline-light mb-4" role="button">
+        <a href="{{ path('app_comment_new', {'id': mobile_phone.id|encrypt}) }}" class="btn btn-outline-light mb-4" role="button">
             {{ 'actions.add_comment'|trans }}
         </a>
         {% for comment in mobile_phone.comments %}
