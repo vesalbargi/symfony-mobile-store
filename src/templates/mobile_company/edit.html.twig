@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit MobileCompany{% endblock %}
+{% block title %}{{ 'labels.edit_mobile_company'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit MobileCompany</h1>
+    <h1>{{ 'labels.edit_mobile_company'|trans }}</h1>
 
-    {{ include('mobile_company/_form.html.twig', {'button_label': 'Update'}) }}
+    {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', mobile_company) %}
+    {{ include('mobile_company/_form.html.twig') }}
+    {% endif %}
 
-    <a href="{{ path('app_mobile_company_index') }}">{{ 'actions.back'|trans }}</a>
-
+    {% if is_granted('ROLE_EDITOR') or is_granted('DELETE', mobile_company) %}
     {{ include('mobile_company/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

@@ -34,11 +34,16 @@ class MobilePhoneType extends AbstractType
             ->add('storage')
             ->add('camera')
             ->add('batteryCapacity')
-            ->add('price')
-            ->add('mobileCompany', EntityType::class, [
+            ->add('price');
+
+        if ($this->security->isGranted('ROLE_EDITOR')) {
+            $builder->add('mobileCompany');
+        } else {
+            $builder->add('mobileCompany', EntityType::class, [
                 'class' => MobileCompany::class,
                 'choices' => $this->getOwnedMobileCompanies(),
             ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -81,7 +81,7 @@ class Builder implements ContainerAwareInterface
                 ->setLinkAttribute('class', 'nav-link');
         }
 
-        if ($this->security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild('nav.logout', ['route' => 'app_logout'])
                 ->setAttribute('class', 'nav-item')
                 ->setLinkAttribute('class', 'nav-link');

@@ -3,7 +3,7 @@ actions:
   show: نمایش
   edit: ویرایش
   delete: حذف
-  back: برگشت به لیست
+  update: ویرایش
   login: ورود
   register: ثبت نام
   search: جستجو
@@ -36,3 +36,30 @@ nav:
   register: ثبت نام
   login: ورود
   logout: خروج
+
+labels:
+  name: تک تاکس
+  about_us: درباره ما
+  register: ثبت نام
+  login: ورود
+  mobile_companies: شرکت های موبایل
+  mobile_phones: موبایل ها
+  comments: نظرات
+  show_comment: نظر
+  edit_mobile_company: ویرایش کمپانی موبایل
+  edit_mobile_phone: ویرایش موبایل
+  edit_comment: ویرایش نظر
+  new_mobile_company: ساخت کمپانی موبایل جدید
+  new_mobile_phone: ساخت موبایل جدید
+  new_comment: اضافه کردن نظر جدید
+
+  brand: نام تجاری
+  model: مدل
+  os: سیستم عامل
+  screen_size: اندازه صفحه
+  memory: حافظه رم
+  storage: حافظه داخلی
+  camera: دوربین
+  battery_capacity: ظرفیت باتری
+  price: قیمت
+  mobile_company: کمپانی موبایل

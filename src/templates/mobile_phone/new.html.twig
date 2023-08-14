@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New MobilePhone{% endblock %}
+{% block title %}{{ 'labels.new_mobile_phone'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new MobilePhone</h1>
+    <h1>{{ 'labels.new_mobile_phone'|trans }}</h1>
 
     {{ include('mobile_phone/_form.html.twig') }}
 

@@ -1,37 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Comment index{% endblock %}
+{% block title %}{{ 'labels.comments'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Comment index</h1>
+    <h1 class="mb-4">{{ 'labels.comments'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Subject</th>
-                <th>Body</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for comment in comments %}
-            <tr>
-                <td>{{ comment.id }}</td>
-                <td>{{ comment.subject }}</td>
-                <td>{{ comment.body }}</td>
-                <td>
-                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}">{{ 'actions.show'|trans }}</a>
-                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">{{ 'actions.edit'|trans }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mb-4">
+        <a href="{{ path('app_comment_new') }}" class="btn btn-outline-primary">{{ 'actions.create'|trans }}</a>
+    </div>
 
-    <a href="{{ path('app_comment_new') }}">{{ 'actions.create'|trans }}</a>
+    {% for comment in comments %}
+        <div class="card m-3 d-inline-block">
+            <div class="card-body">
+                <h5 class="card-title">{{ comment.subject }}</h5>
+                <p class="card-text">{{ comment.body }}</p>
+                <a href="{{ path('app_comment_show', {'id': comment.id}) }}"
+                   class="btn btn-outline-primary me-2">{{ 'actions.show'|trans }}</a>
+                {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', comment) %}
+                <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
+                   class="btn btn-outline-success">{{ 'actions.edit'|trans }}</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -3,7 +3,7 @@ actions:
   show: Show
   edit: Edit
   delete: Delete
-  back: back to list
+  update: Update
   login: Login
   register: Register
   search: Search
@@ -39,3 +39,32 @@ nav:
   register: Register
   login: Login
   logout: Log out
+
+labels:
+  name: TechTalks
+  about_us: About Us
+  register: Register
+  login: Login
+  mobile_companies: Mobile Companies
+  mobile_phones: Mobile Phones
+  comments: Comments
+  show_comment: Comment
+  edit_mobile_company: Edit Mobile Company
+  edit_mobile_phone: Edit Mobile Phone
+  edit_comment: Edit Comment
+  new_mobile_company: Create New Mobile Company
+  new_mobile_phone: Create New Mobile Phone
+  new_comment: Create New Comment
+
+  brand: Brand
+  model: Model
+  os: Operating System
+  screen_size: Screen Size
+  memory: Memory
+  storage: Storage
+  camera: Camera
+  battery_capacity: Battery Capacity
+  price: Price
+  mobile_company: Mobile Company
+
+

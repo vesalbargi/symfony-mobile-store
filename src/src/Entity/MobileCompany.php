@@ -48,7 +48,7 @@ class MobileCompany implements TimeLoggerInterface, OwnerInterface
 
     public function __toString(): string
     {
-        return "[{$this->getId()}]  {$this->getName()}";
+        return $this->getName();
     }
 
     public function getId(): ?int

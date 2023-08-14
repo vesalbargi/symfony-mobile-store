@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New MobileCompany{% endblock %}
+{% block title %}{{ 'labels.new_mobile_company'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new MobileCompany</h1>
+    <h1>{{ 'labels.new_mobile_company'|trans }}</h1>
 
     {{ include('mobile_company/_form.html.twig') }}
-
-    <a href="{{ path('app_mobile_company_index') }}">{{ 'actions.back'|trans }}</a>
 {% endblock %}

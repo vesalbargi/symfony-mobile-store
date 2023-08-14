@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Comment{% endblock %}
+{% block title %}{{ 'labels.edit_comment'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Comment</h1>
+    <h1>{{ 'labels.edit_comment'|trans }}</h1>
 
-    {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+    {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', comment) %}
+        {{ include('comment/_form.html.twig') }}
+    {% endif %}
 
-    <a href="{{ path('app_comment_index') }}">{{ 'actions.back'|trans }}</a>
-
-    {{ include('comment/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_EDITOR') or is_granted('DELETE', comment) %}
+        {{ include('comment/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
