@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{{ 'labels.name'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container text-start">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <h2 class="mb-5">{{ 'home.registered_text'|trans }}</h2>
             <a href="{{ path('app_mobile_company_index') }}" class="btn btn-outline-light btn-lg me-2"
                role="button">{{ 'home.company_button'|trans }}</a>

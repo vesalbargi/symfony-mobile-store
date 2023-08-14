@@ -38,4 +38,16 @@ class SearchService
         $mobilePhoneRepository = $this->entityManager->getRepository(MobilePhone::class);
         return $mobilePhoneRepository->searchByModel($mobilePhoneModelQuery);
     }
+
+    /**
+     * @param $mobilePhoneBrandAndModelQuery
+     * @return MobilePhone[]
+     */
+    public function searchBrandAndModel($mobilePhoneBrandAndModelQuery): array
+    {
+        /** @var MobilePhoneRepository $mobilePhoneRepository */
+
+        $mobilePhoneRepository = $this->entityManager->getRepository(MobilePhone::class);
+        return $mobilePhoneRepository->searchByBrandAndModel($mobilePhoneBrandAndModelQuery);
+    }
 }

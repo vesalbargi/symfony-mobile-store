@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MobilePhone{% endblock %}
+{% block title %}{{ mobile_phone.brand }} {{ mobile_phone.model }}{% endblock %}
 
 {% block body %}
-    <h1>MobilePhone</h1>
+    <h1 class="mb-4">{{ mobile_phone.brand }} {{ mobile_phone.model }}</h1>
+
+    <div class="container d-inline-flex mb-4">
+        {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', mobile_phone) %}
+        <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}"
+           class="btn btn-outline-success me-2">{{ 'actions.edit'|trans }}</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_EDITOR') or is_granted('DELETE', mobile_phone) %}
+        {{ include('mobile_phone/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
 
     <table class="table">
         <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ mobile_phone.id }}</td>
-        </tr>
         <tr>
             <th>Brand</th>
             <td>{{ mobile_phone.brand }}</td>
@@ -20,7 +27,7 @@
             <td>{{ mobile_phone.model }}</td>
         </tr>
         <tr>
-            <th>OperatingSystem</th>
+            <th>Operating System</th>
             <td>{{ mobile_phone.operatingSystem }}</td>
         </tr>
         <tr>
@@ -40,43 +47,49 @@
             <td>{{ mobile_phone.camera }}</td>
         </tr>
         <tr>
-            <th>BatteryCapacity</th>
+            <th>Battery Capacity</th>
             <td>{{ mobile_phone.batteryCapacity }}</td>
         </tr>
         <tr>
             <th>Price</th>
-            <td>{{ mobile_phone.price }}</td>
+            <td>{{ mobile_phone.price|format_currency('USD') }}</td>
         </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_mobile_phone_index') }}">{{ 'actions.back'|trans }}</a>
+    <div class="container d-inline-flex mt-4">
+        <button class="btn btn-outline-primary me-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#reviewForm">
+            {{ 'actions.comments'|trans }}
+        </button>
 
-    <a href="{{ path('app_mobile_phone_edit', {'id': mobile_phone.id}) }}">{{ 'actions.edit'|trans }}</a>
-
-    {{ include('mobile_phone/_delete_form.html.twig') }}
-
-    <button class="btn btn-outline-light mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#reviewForm">
-        {{ 'actions.comments'|trans }}
-    </button>
-
-    <div class="collapse mt-4" id="reviewForm">
-        <a href="{{ path('app_comment_new', {'id': mobile_phone.id}) }}" class="btn btn-outline-light mb-4" role="button">
+        <a href="{{ path('app_comment_new', {'id': mobile_phone.id|encrypt}) }}" class="btn btn-outline-primary"
+           role="button">
             {{ 'actions.add_comment'|trans }}
         </a>
+    </div>
+
+    <div class="collapse mt-4" id="reviewForm">
         {% for comment in mobile_phone.comments %}
-            <div class="card card-body mb-4">
-                <div class="mb-2">
-                    <div class="text-end">
-                        <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
-                           class="btn btn-primary" role="button">{{ 'actions.edit'|trans }}</a>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            {{ comment.owner.email }}
+                        </div>
+                        <div class="col-6 text-end">
+                            {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', comment) %}
+                            <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
+                               class="btn btn-outline-success">{{ 'actions.edit'|trans }}</a>
+                            {% endif %}
+                        </div>
                     </div>
-                    <label class="form-label">Email:</label>
-                    <input type="text" class="form-control mb-2" value="{{ comment.owner.email }}" readonly>
-                    <label class="form-label">Subject:</label>
-                    <input type="text" class="form-control mb-2" value="{{ comment.subject }}" readonly>
-                    <label class="form-label">Text:</label>
-                    <textarea class="form-control" readonly>{{ comment.body }}</textarea>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ comment.subject }}
+                    </h5>
+                    <p class="card-text">{{ comment.body }}</p>
                 </div>
             </div>
         {% endfor %}
