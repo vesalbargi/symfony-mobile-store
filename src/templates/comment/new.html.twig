@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Comment{% endblock %}
+{% block title %}{{ 'labels.new_comment'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Comment</h1>
+    <h1>{{ 'labels.new_comment'|trans }}</h1>
 
     {{ include('comment/_form.html.twig') }}
-
-    <a href="{{ path('app_comment_index') }}">{{ 'actions.back'|trans }}</a>
 {% endblock %}

@@ -43,6 +43,19 @@ class MobilePhoneRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function searchByBrandAndModel($mobilePhoneModelQuery)
+    {
+        $qb = $this->createQueryBuilder('mp');
+
+        return $qb->where($qb->expr()->like('mp.model', ':model'))
+            ->orWhere($qb->expr()->like('mp.brand', ':brand'))
+            ->setParameter('brand', "%$mobilePhoneModelQuery%")
+            ->setParameter('model', "%$mobilePhoneModelQuery%")
+            ->orderBy('mp.model', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return MobilePhone[] Returns an array of MobilePhone objects
 //     */

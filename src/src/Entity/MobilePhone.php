@@ -77,7 +77,7 @@ class MobilePhone implements TimeLoggerInterface, OwnerInterface
 
     public function __toString(): string
     {
-        return "[{$this->getId()}]  {$this->getBrand()} {$this->getModel()}";
+        return "{$this->getBrand()} {$this->getModel()}";
     }
 
 

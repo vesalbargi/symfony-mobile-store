@@ -1,39 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MobileCompany index{% endblock %}
+{% block title %}{{ 'labels.mobile_companies'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>MobileCompany index</h1>
+    <h1>{{ 'labels.mobile_companies'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for mobile_company in mobile_companies %}
-            <tr>
-                <td>{{ mobile_company.id }}</td>
-                <td>{{ mobile_company.name }}</td>
-                <td>{{ mobile_company.phone }}</td>
-                <td>{{ mobile_company.address }}</td>
-                <td>
-                    <a href="{{ path('app_mobile_company_show', {'id': mobile_company.id}) }}">{{ 'actions.show'|trans }}</a>
-                    <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}">{{ 'actions.edit'|trans }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <form class="input-group my-4" method="get" action="{{ path('app_mobile_company_search') }}">
+            <div class="col-4">
+                <input type="search" placeholder="{{ 'actions.search'|trans }}" class="form-control" name="q" value="{{ q|default('') }}">
+            </div>
+            <button type="submit" class="btn btn-outline-primary">{{ 'actions.search'|trans }}</button>
+        </form>
+        {% if is_granted('ROLE_COMPANY_OWNER') %}
+            <a href="{{ path('app_mobile_company_new') }}"
+               class="btn btn-outline-primary">{{ 'actions.create'|trans }}</a>
+        {% endif %}
+    </div>
 
-    <a href="{{ path('app_mobile_company_new') }}">{{ 'actions.create'|trans }}</a>
+    {% for mobile_company in mobile_companies %}
+        <div class="card m-3 d-inline-block" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ mobile_company.name }}</h5>
+                <p class="card-text">
+                    <span>Phone: </span>
+                    <span>{{ mobile_company.phone }}</span>
+                <p>
+                <p class="card-text">
+                    <span>Address: </span>
+                    <span>{{ mobile_company.address }}</span>
+                </p>
+                <a href="{{ path('app_mobile_company_show', {'id': mobile_company.id}) }}"
+                   class="btn btn-outline-primary me-2">{{ 'actions.show'|trans }}</a>
+                {% if is_granted('ROLE_EDITOR') or is_granted('EDIT', mobile_company) %}
+                <a href="{{ path('app_mobile_company_edit', {'id': mobile_company.id}) }}"
+                   class="btn btn-outline-success">{{ 'actions.edit'|trans }}</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
