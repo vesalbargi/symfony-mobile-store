@@ -23,9 +23,9 @@ class MobilePhoneTest extends WebTestCase
         $allMobilePhones = $mobilePhoneRepo->findAll();
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'MobilePhone index');
+        $this->assertSelectorTextContains('h1', 'Mobile Phones');
 
-        $rows = $crawler->filter('table > tbody > tr');
+        $rows = $crawler->filter('div > div > h5');
         $this->assertCount(count($allMobilePhones), $rows);
     }
 }

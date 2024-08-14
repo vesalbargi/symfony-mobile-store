@@ -70,5 +70,11 @@ class MobilePhoneSearchTest extends KernelTestCase
         $result = $mobilePhoneSearchService->searchBrand("a");
         $this->assertContains($mobilePhone1, $result);
         $this->assertContains($mobilePhone2, $result);
+
+        $result = $mobilePhoneSearchService->searchBrandAndModel("ph");
+        $this->assertContains($mobilePhone1, $result);
+
+        $result = $mobilePhoneSearchService->searchBrandAndModel("lax");
+        $this->assertContains($mobilePhone2, $result);
     }
 }
